@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.t-scroll {
+  animation: scrollt 40s linear infinite;
+}
+.b-scroll {
+  animation: scrollt 40s linear infinite;
+}
+
+@keyframes scrollt {
+  to {
+    animation-duration: 40s;
+    transform: translateY(-100%);
+  }
+}
+
+.b-scroll {
+  animation-direction: reverse;
+}
+
+.reverse-animation {
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0),
+    /* Fully transparent on the left */ rgba(0, 0, 0, 1) 20%,
+    /* Fully opaque after 20% from the left */ rgba(0, 0, 0, 1) 80%,
+    /* Fully opaque until 80% from the left */ rgba(0, 0, 0, 0)
+      /* Fully transparent on the right */
+  );
+}
+
+
+
+
+
+
+@keyframes scrolling {
+  to {
+    animation-duration: 40s;
+    transform: translateY(-50%);
+  }
+}
+
+
+.scroll-up {
+  animation: scrolling 30s linear infinite;
+}
+
+.scroll-down {
+  animation: scrolling 30s linear infinite;
+  animation-direction: reverse;
+}
