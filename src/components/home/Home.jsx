@@ -17,18 +17,18 @@ const Home = () => {
       <div id="hero-section">
         <HeroSection />
       </div>
-      {/* <div id="product-categories">
+      <div id="product-categories">
         <ProductCategories />
-      </div> */}
+      </div>
       <div id="about-section">
         <AboutUs />
       </div>
       <div id="scrolling-section">
         <Scrolling />
       </div>
-      {/* <div id="miniature-section">
+      <div id="miniature-section">
         <BestSelling />
-      </div> */}
+      </div>
       <div id="resin-section">
         <ArtResin />
       </div>
@@ -44,9 +44,9 @@ const Home = () => {
       <div id="reviews-section">
         <Reviews />
       </div>
-      {/* <div id="features-section">
+      <div id="features-section">
         <Features />
-      </div> */}
+      </div>
     </div>
   );
 };

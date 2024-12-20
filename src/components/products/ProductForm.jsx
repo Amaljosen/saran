@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useProductContext } from "../../Context";
@@ -184,16 +184,7 @@ function Form() {
     }
   };
 
-  // const handleFileChange = (event) => {
-  //   const selectedFiles = Array.from(event.target.files)
-  //     .filter((file) => file.type.startsWith("image/")) // Only allow images
-  //     .slice(0, 14) // Limit to 14 files
-  //     .map((file) => ({
-  //       name: file.name,
-  //       size: (file.size / 5120).toFixed(2), // Convert size to KB
-  //     }));
-  //   setFiles([...files, ...selectedFiles]);
-  // };
+ 
 
   const handleFileChange = (event) => {
     const selectedFiles = Array.from(event.target.files)
@@ -225,69 +216,68 @@ function Form() {
           </div>
 
           {/* Stepper */}
-          <div className="pt-8">
-            <div className="w-full lg:w-[60%] mx-auto flex justify-around items-center gap-5 lg:gap-10 pb-8">
-              {[IoMdContacts, MdAddToPhotos, BsBoxSeam].map((Icon, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col justify-center items-center"
-                >
+          <div className="py-4 md:py-6 lg:py-8">
+            <div className="relative w-[90%] sm:w-[80%] lg:w-[50%] mx-auto">
+              {/* Step Icons */}
+              <div className="flex justify-between items-center gap-2 sm:gap-4 lg:gap-5 pb-4 md:pb-6 lg:pb-8">
+                {[IoMdContacts, MdAddToPhotos, BsBoxSeam].map((Icon, index) => (
                   <div
-                    className={`w-10 h-10 lg:w-12 lg:h-12 flex justify-center items-center rounded-md ${
-                      currentStep > index
-                        ? "bg-[#8c4cff] text-white"
-                        : "bg-gray-200"
+                    key={index}
+                    className="flex flex-col justify-center items-center w-1/3"
+                  >
+                    <div
+                      className={`w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 flex justify-center items-center rounded-md ${
+                        currentStep > index
+                          ? "bg-[#8c4cff] text-white"
+                          : "bg-gray-200"
+                      }`}
+                    >
+                      <Icon className="text-sm sm:text-base lg:text-xl" />
+                    </div>
+                    <h1 className="hidden sm:block text-xs sm:text-sm lg:text-base font-semibold text-center">
+                      {
+                        [
+                          "Customer Details",
+                          "Asset Submission",
+                          "Order Review",
+                        ][index]
+                      }
+                    </h1>
+                  </div>
+                ))}
+              </div>
+
+              {/* Background line */}
+              <div className="absolute top-[100%] -translate-y-1/2 left-0 w-full h-1 bg-gray-300 rounded-full"></div>
+
+              {/* Progress line */}
+              <div
+                className="absolute top-[100%] -translate-y-1/2 left-0 h-1 bg-[#8c4cff] rounded-full"
+                style={{ width: `${(currentStep - 1) * (100 / (steps - 1))}%` }}
+              ></div>
+
+              {/* Dots with Tick */}
+              <div className="flex justify-between absolute top-[100%] -translate-y-1/2 left-0 w-full">
+                {Array.from({ length: steps }).map((_, index) => (
+                  <div
+                    key={index}
+                    className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 flex items-center justify-center ${
+                      index < currentStep
+                        ? "border-[#8c4cff] bg-[#8c4cff] text-white"
+                        : "border-[#8c4cff] bg-white"
                     }`}
                   >
-                    <Icon className="text-xl" />
+                    {index < currentStep && (
+                      <span className="text-xs sm:text-sm font-bold">✓</span>
+                    )}
                   </div>
-                  <h1 className="hidden lg:block font-semibold">
-                    {
-                      ["Customer Details", "Asset Submission", "Order Review"][
-                        index
-                      ]
-                    }
-                  </h1>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Tracker Line */}
-          <div className="relative w-[80%] lg:w-[50%] mx-auto py-4 lg:py-4">
-            {/* Background line */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gray-300 rounded-full"></div>
-
-            {/* Progress line */}
-            <div
-              className="absolute top-0 left-0 h-1 bg-[#8c4cff] rounded-full"
-              style={{ width: `${(currentStep - 1) * (100 / (steps - 1))}%` }}
-            ></div>
-
-            {/* Dots */}
-            <div className="flex justify-between relative -top-4">
-              {Array.from({ length: steps }).map((_, index) => (
-                <div
-                  key={index}
-                  className={`w-6 h-6 rounded-full border-2 border-[#8c4cff] bg-white z-[5] 
-                                        ${
-                                          index < currentStep
-                                            ? "bg-[#8c4cff]"
-                                            : "bg-white"
-                                        }`}
-                  style={{ transform: "translateY(-50%)" }}
-                >
-                  {index < currentStep && (
-                    <div className="flex justify-center items-center w-full h-full rounded-full text-white  bg-[#8c4cff] font-bold">
-                      ✓
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Steps Content */}
+         <div className="mt-12">
+            {/* Steps Content */}
           {currentStep === 1 && (
             <div className="w-full lg:w-[80%] mx-auto border mt-8 p-4 rounded-md relative">
               <div className="flex flex-col justify-center items-center py-3 text-center">
@@ -297,9 +287,8 @@ function Form() {
                   </div>
                 </div>
                 <h1 className="font-semibold text-xl">Customer Details</h1>
-                <p className="text-lg">
-                  Lorem ipsum dolor sit amet consectetur. Pellentesque vulputate
-                  sed at id.
+                <p className="text-lg text-gray-500">
+                Please provide accurate information to ensure a seamless process.  
                 </p>
               </div>
               <form
@@ -594,7 +583,7 @@ function Form() {
               </div>
               <div>
                 <div className="grid lg:grid-cols-2 grid-cols-1 lg:px-5 py-1 lg:py-4 lg:gap-5">
-                  <div className="lg:border rounded-md p-3 md:p-5 justify-between space-y-2 border-[#E8EAED] ">
+                  <div className="lg:border rounded-md p-3 md:p-5 flex flex-col lg:justify-between space-y-2 border-[#E8EAED] ">
                     <h1 className="font-bold text-xl text-[#4c4c4c]">
                       {productData.productName}
                     </h1>
@@ -620,10 +609,11 @@ function Form() {
                       </button>
                     </div>
                   </div>
-                  <div className="lg:border border-[#E8EAED] rounded-md p-3 md:p-5 space-y-3">
+                  <div className="lg:border border-[#E8EAED] flex flex-col justify-between rounded-md p-3 md:p-5 space-y-3">
                     <h1 className="font-bold text-xl text-[#4c4c4c] ">
                       Billing Details :-
                     </h1>
+                    <div className="space-y-3">
                     <div className="flex justify-between text-[#666666]">
                       <h1>Product Amount</h1>
                       <p>Rs: {productData.price} /-</p>
@@ -639,6 +629,8 @@ function Form() {
                       <p className="font-bold text-[#4c4c4c]">
                         Rs: {totalPrice} /-
                       </p>
+                    </div>
+                   
                     </div>
                     <button
                       onClick={handleSubmit}
@@ -669,6 +661,8 @@ function Form() {
               </div>
             </div>
           )}
+         </div>
+
         </div>
         {backPopup && (
           <div className="fixed inset-0 flex items-center bg-gray-500 bg-opacity-50  justify-center z-50">

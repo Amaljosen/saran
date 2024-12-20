@@ -134,8 +134,8 @@ const AddSessions = () => {
       }, 5000);
     } catch (error) {
       setIsLoading(false);
-      console.error("Error while submitting:", error);
-      alert("Failed to submit session data. Please try again.");
+      // console.error("Error while submitting:", error);
+      // alert("Failed to submit session data. Please try again.");
     }
   };
 
@@ -376,7 +376,7 @@ const AddSessions = () => {
         <div className="">
           <button
             type="submit"
-            className="px-4 py-2 rounded w-48  border bg-[#8c4cff] text-white md:hover:scale-105 transition-all duration-300 text-white'"
+            className="px-4 py-2 rounded w-48 text-sm  border bg-gradient-to-r from-primary to-text text-white md:hover:scale-105 transition-all duration-300 text-white'"
           >
             Submit
           </button>

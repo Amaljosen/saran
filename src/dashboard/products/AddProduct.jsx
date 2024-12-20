@@ -17,12 +17,12 @@ function AddProduct() {
     const [productVariation, setProductVariation] = useState({
         productVariation_price: '',
         size: '',
-        shipping_charges: '',
-        delivery_details: '',
+        shipping_charges: '120',
+        delivery_details: '7 to 10 days',
         requirements1: '',
         requirements2: '',
         requirements3: '',
-        theme: '',
+        theme: 'Customize',
         description: '',
         about: ''
     });
@@ -44,7 +44,7 @@ function AddProduct() {
                 setCategories(response.data.data); // Assuming the response data is in response.data.data
 
             } catch (error) {
-                console.error('Error fetching categories:', error);
+                // console.error('Error fetching categories:', error);
             }
         };
 
@@ -58,7 +58,7 @@ function AddProduct() {
                     const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/v1/subcategory/${selectedCategory}`);
                     setSubcategories(response.data.data); // Assuming the response data is in response.data.data
                 } catch (error) {
-                    console.error('Error fetching subcategories:', error);
+                    // console.error('Error fetching subcategories:', error);
                 }
             };
 
@@ -69,7 +69,7 @@ function AddProduct() {
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent the default form submission behavior
 
-           console.log(productVariation.requirements1,productVariation.requirements2,productVariation.requirements3)
+        //    console.log(productVariation.requirements1,productVariation.requirements2,productVariation.requirements3)
         if (!productName || !selectedSubcategory) {
             setShowErrorPopup(true);
             return;
@@ -110,7 +110,7 @@ function AddProduct() {
             formData.append("theme", productVariation.theme);
             formData.append("about", productVariation.about);
 
-            console.log(formData)
+            // console.log(formData)
             // console.log('Data to submit:', dataToSubmit);
             // console.log('Data:', JSON.parse(productVariation.requirements));
 
@@ -149,7 +149,7 @@ function AddProduct() {
             })
             // console.log(responsedata.data);
         } catch (error) {
-            console.error('Error adding product variation:', error.response?.data || error.message);
+            // console.error('Error adding product variation:', error.response?.data || error.message);
             alert('Unsupported data detected. Please provide valid data!');
             setTimeout(() => {
                 setShowSubmitPopup(false)
@@ -185,16 +185,16 @@ function AddProduct() {
                     <div className='py-5 '>
                         <div className='bg-[#e9e9e9] w-full border-l-4 border-[#8c4cff] mb-3'>
                             <div className='flex space-x-2 text-sm md:text-base text-[#000000] font-semibold p-2 items-center'>
-                                <h1>Product Details</h1>
+                                <h1>Product Details:-</h1>
                                 <MdEditDocument className='text-xl' />
                             </div>
                         </div>
                         <div className="lg:flex justify-start items-center px-2 lg:space-x-6 pb-6 lg:space-y-0 space-y-4">
                             {/* Category Dropdown */}
                             <div className="text-sm md:text-base space-y-1">
-                                <h2>Category</h2>
+                                <h2>Category:-</h2>
                                 <select
-                                    className="focus:outline-none border text-sm md:text-base rounded p-1 w-full lg:w-[300px] h-[40px]"
+                                    className="focus:outline-none border text-sm md:text-base rounded p-2 w-full lg:w-[300px] h-[40px]"
                                     value={selectedCategory}
                                     onChange={(e) => setSelectedCategory(e.target.value)}
                                     required
@@ -210,9 +210,9 @@ function AddProduct() {
 
                             {/* Subcategory Dropdown */}
                             <div className="text-sm md:text-base space-y-1 ">
-                                <h2>Subcategory</h2>
+                                <h2>Subcategory:-</h2>
                                 <select
-                                    className="focus:outline-none border text-sm md:text-base rounded p-1 w-full  lg:w-[300px] h-[40px]"
+                                    className="focus:outline-none border text-sm md:text-base rounded p-2 w-full  lg:w-[300px] h-[40px]"
                                     value={selectedSubcategory}
                                     onChange={(e) => setSelectedSubcategory(e.target.value)}
                                     required
@@ -229,10 +229,10 @@ function AddProduct() {
 
                             {/* Product Name Dropdown */}
                             <div className="text-sm md:text-base space-y-1">
-                                <h2>Product Name:</h2>
+                                <h2>Product Name:-</h2>
                                 <input
                                     type="text"
-                                    className="focus:outline-none border  rounded p-1 w-full lg:w-[300px] h-[40px]"
+                                    className="focus:outline-none border  rounded p-2 w-full lg:w-[300px] h-[40px]"
                                     value={productName}
                                     onChange={(e) => setProductName(e.target.value)}
                                     placeholder={
@@ -254,30 +254,30 @@ function AddProduct() {
                         <div className='lg:flex justify-start items-center px-2 lg:space-x-6 pb-2 lg:space-y-0 space-y-4'>
                             <div className='text-sm md:text-base space-y-1'>
                                 <h2>Product Image :-</h2>
-                                <input name='productVariation_image' onChange={handleFileChange} required type="file" className='focus:outline-none border  rounded p-1 w-full  ' />
+                                <input name='productVariation_image' onChange={handleFileChange} required type="file" className='focus:outline-none border  rounded p-2 w-full  ' />
                             </div>
                             <div className='text-sm md:text-base space-y-1'>
                                 <h2>Product Price :-</h2>
-                                <input type="text" name='productVariation_price' value={productVariation.productVariation_price} required onChange={handleInputChange} placeholder='Enter the Product Prize' className='focus:outline-none border rounded p-1 w-full h-[40px]' />
+                                <input type="text" name='productVariation_price' value={productVariation.productVariation_price} required onChange={handleInputChange} placeholder='Enter the Product Prize' className='focus:outline-none border rounded p-2 w-full h-[40px]' />
                             </div>
                             <div className='text-sm md:text-base space-y-1'>
                                 <h2>Size :-</h2>
-                                <input type="text" name='size' value={productVariation.size} onChange={handleInputChange} placeholder='Enter  Product Size' required className='focus:outline-none border rounded p-1 w-full h-[40px]' />
+                                <input type="text" name='size' value={productVariation.size} onChange={handleInputChange} placeholder='Enter Product Size' required className='focus:outline-none border rounded p-2 w-full h-[40px]' />
                             </div>
                             <div className='text-sm md:text-base space-y-1'>
                                 <h2>Theme :-</h2>
-                                <input type="text" name='theme' value={productVariation.theme} onChange={handleInputChange} placeholder='Enter Theme' required className='focus:outline-none border  rounded p-1 w-full h-[40px]' />
+                                <input type="text" name='theme' value={productVariation.theme} onChange={handleInputChange} placeholder='Enter Theme' required className='focus:outline-none border  rounded p-2 w-full h-[40px]' />
                             </div>
 
                         </div>
                         <div className='lg:flex justify-start items-center px-2 lg:space-x-6 pb-2 lg:space-y-0  space-y-4 lg:pt-0 pt-2'>
                             <div className='text-sm md:text-base space-y-1'>
                                 <h2>Shipping Charges :-</h2>
-                                <input type="text" name='shipping_charges' value={productVariation.shipping_charges} placeholder='Enter  Shipping Charges' required onChange={handleInputChange} className='focus:outline-none border  rounded p-1 w-full h-[40px]' />
+                                <input type="text" name='shipping_charges' value={productVariation.shipping_charges} placeholder='Enter Shipping Charges' required onChange={handleInputChange} className='focus:outline-none border  rounded p-2 w-full h-[40px]' />
                             </div>
                             <div className='text-sm md:text-base space-y-1'>
                                 <h2>Delivery Details :-</h2>
-                                <input type="text" name='delivery_details' value={productVariation.delivery_details} required onChange={handleInputChange} placeholder='Enter Delivery Details' className='focus:outline-none border  rounded p-1 w-full h-[40px]' />
+                                <input type="text" name='delivery_details' value={productVariation.delivery_details} required onChange={handleInputChange} placeholder='Enter Delivery Details' className='focus:outline-none border  rounded p-2 w-full h-[40px]' />
                             </div>
 
                         </div>
@@ -286,12 +286,12 @@ function AddProduct() {
                             <div className='text-sm md:text-base space-y-1'>
                                 <h2>Description :-</h2>
                                 <textarea name='description'
-                                    value={productVariation.description} onChange={handleInputChange} required className='focus:outline-none border  w-full h-[60px]  rounded p-1' rows='2' cols='51' placeholder="Enter message here..."></textarea>
+                                    value={productVariation.description} onChange={handleInputChange} required className='focus:outline-none border  w-full h-[60px]  rounded p-2' rows='2' cols='51' placeholder="Enter message here..."></textarea>
                             </div>
                             <div className='text-sm md:text-base space-y-1 '>
                                 <h2>About :-</h2>
                                 <textarea
-                                    name='about' value={productVariation.about} onChange={handleInputChange} placeholder='Enter About Product' required className='focus:outline-none border rounded p-1 w-full ' rows='2' cols='51'   ></textarea>
+                                    name='about' value={productVariation.about} onChange={handleInputChange} placeholder='Enter About Product' required className='focus:outline-none border rounded p-2 w-full ' rows='2' cols='51'   ></textarea>
                             </div>
                         </div>
 
@@ -359,8 +359,8 @@ function AddProduct() {
 
 
                         <div className='flex justify-center lg:justify-start space-x-4 items-center px-2 text-sm md:text-base pb-5 lg:pb-0 '>
-                            <button onClick={handleReset} className='lg:px-4 px-4 py-2 md:hover:scale-105 transition-all duration-300 lg:py-1 rounded  border'>Reset</button>
-                            <button type='submit' className='lg:px-4 px-4 py-2 lg:py-1 rounded border bg-[#8c4cff] md:hover:scale-105 transition-all duration-300 text-white'>Add Product</button>
+                            <button onClick={handleReset} className='lg:px-4 px-4 py-2 md:hover:scale-105 transition-all duration-300 text-sm rounded  border'>Reset</button>
+                            <button type='submit' className='lg:px-4 px-4 py-2 text-sm rounded border bg-gradient-to-r from-primary to-text md:hover:scale-105 transition-all duration-300 text-white'>Add Product</button>
                         </div>
 
                         {showErrorPopup && (

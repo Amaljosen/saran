@@ -24,7 +24,7 @@ const SideBar = ({ setOpen }) => {
       <div className="flex flex-col pt-8 px-4 space-y-4 text-sm text-gray-800">
         {[
           { to: "/", label: "Home", icon: <HiOutlineHome /> },
-          // { to: "/products", label: "Products", icon: <RiShoppingBasket2Line /> },
+          { to: "/products", label: "Products", icon: <RiShoppingBasket2Line /> },
           { to: "/sessions", label: "Sessions", icon: <TbCalendarHeart /> },
           { to: "/gallery", label: "Gallery", icon: <LuGalleryVerticalEnd /> },
           { to: "/contact", label: "Contact Us", icon: <LuContact2 /> },

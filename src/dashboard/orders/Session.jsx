@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { SlArrowLeft } from "react-icons/sl";
+import { TbLogout2 } from "react-icons/tb";
+import { FiEdit } from "react-icons/fi";
+
+import axios from "axios";
+
 
 const Session = () => {
   const navigate = useNavigate();
@@ -10,54 +14,54 @@ const Session = () => {
   useEffect(() => {
     const fetchSession = async () => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_BACKEND_API}/v1/session-orders/${permanentId}`
+        const response = await axios.get(
+          `https://saran-backend-1e62.onrender.com/v1/session-orders/${permanentId}`
         );
-        const data = await response.json();
-        setSession(data.sessionOrders);
+        setSession(response.data.sessionOrders);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        // console.error("Error fetching data:", error);
       }
     };
-
+  
     fetchSession();
   }, [permanentId]);
-
+  
   const handleBackClick = () => {
     navigate("/dashboard/my-orders");
   };
 
   return (
-    <div className="w-[90%] mx-auto container mt-24 py-6">
+    <div className="container w-[90%] mt-20 mx-auto">
       <div className="">
-        <div className="bg-white rounded-lg ">
+        <div className="bg-white rounded-lg">
           {session && (
-            <div>
+            <div key={session.permanent_id}>
               {/* Header */}
-              <div className="flex items-center lg:text-xl mb-6">
-                <button
-                  onClick={handleBackClick}
-                  className="text-gray-500 hover:text-gray-700 flex items-center"
-                >
-                  <SlArrowLeft className="mr-2" />
-                  Back
-                </button>
-              </div>
-              <div className="flex    items-end justify-end w-full mb-3 ">
-                                <h2 className="md:text-xl text-base font-semibold text-gray-800">
-                                    Session Id 
-                                </h2>
-                                <h2 className="md:text-xl text-base text-gray-400 ">#{session.order_id}</h2>
-                               
+              <div className=" flex  items-center justify-between mb-6">
+                            <div className="flex bg-gray-100 items-center space-x-1 cursor-pointer border border-gray-200 rounded px-3 py-2 hover:bg-gray-100 transition-all duration-300 " onClick={previousclick} >
+                                <p className=""><TbLogout2 className="" /> </p>
+                                <p className="">Back</p>
+                            </div>
+
+                                <div className="flex space-x-1 items-center  ">
+                                    <h2 className="md:text-lg text-base font-semibold text-gray-800">
+                                        Order Id:
+                                    </h2>
+                                    <h2 className="md:text-lg text-base text-gray-400 ">#{order.order_id}</h2>
+
+                                </div>
                             </div>
 
               {/* Session Details */}
               <div className="grid gap-6 mb-8">
                 <div>
-                  <div className="bg-[#e9e9e9] w-full border-l-4 border-[#8c4cff] py-2">
+                  <div className="bg-[#e9e9e9] flex space-x-1 w-full border-l-4 border-[#8c4cff] py-2">
                     <h3 className="text-lg font-medium text-gray-700">
                       Session Details
                     </h3>
+                    <span>
+                      <FiEdit />
+                    </span>
                   </div>
                   <ul className="text-gray-600 flex flex-wrap md:flex-row gap-6 mt-4">
                     <li className="flex flex-col">
@@ -94,10 +98,13 @@ const Session = () => {
 
               {/* Customer Details */}
               <div>
-                <div className="bg-[#e9e9e9] w-full border-l-4 border-[#8c4cff] py-2">
+                <div className="bg-[#e9e9e9] flex space-x-1 w-full border-l-4 border-[#8c4cff] py-2">
                   <h3 className="text-lg font-medium text-gray-700">
                     Customer Details
                   </h3>
+                  <span>
+                    <FiEdit />
+                  </span>
                 </div>
                 <div className="flex flex-wrap gap-4 text-gray-600 mt-3">
                   <div className="flex flex-col gap-3">
@@ -145,10 +152,13 @@ const Session = () => {
 
               {/* Assets Provided */}
               <div className="mt-5">
-                <div className="bg-[#e9e9e9] w-full border-l-4 border-[#8c4cff] py-2">
+                <div className="bg-[#e9e9e9] flex space-x-1 w-full border-l-4 border-[#8c4cff] py-2">
                   <h3 className="text-lg font-medium text-gray-700">
                     Assets Provided
                   </h3>
+                  <span>
+                    <FiEdit />
+                  </span>
                 </div>
                 <div className="flex flex-col gap-4 mt-4">
                   {session.photo.map((photoUrl, index) => (

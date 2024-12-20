@@ -191,7 +191,7 @@ const Footer = () => {
                 </ScrollLink>
               </div>
 
-              {/* <div className="space-y-2">
+              <div className="space-y-2">
                 <h3 className="font-semibold mb-3 text-sm">Products</h3>
                 <Link
                   to="/products"
@@ -236,7 +236,7 @@ const Footer = () => {
                 >
                   Miniature
                 </Link>
-              </div> */}
+              </div>
 
               <div className="hidden md:block space-y-2">
                 <h3 className="font-semibold mb-3 text-sm">Session</h3>
@@ -304,7 +304,7 @@ const Footer = () => {
                 </a>
               </div>
 
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <h3 className="font-semibold mb-3 text-sm">Address</h3>
                 <p className="block hover:text-purple-500">No:8, 11th Cross</p>
                 <p className="block hover:text-purple-500">Kailash Nagar</p>
@@ -312,7 +312,7 @@ const Footer = () => {
                 <p className="block hover:text-purple-500">
                   Tamil Nadu - 620019
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

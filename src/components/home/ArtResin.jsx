@@ -35,7 +35,7 @@ const ArtResin = () => {
         <div className='p-5 md:p-0 md:mt-5 text-gray-800'>
         <h1 className='font-medium'>Why Resin Products?</h1>
         <p className='text-sm text-gray-600'>Resin products are durable, beautiful, and perfect for preserving memories.</p>
-        {/* <motion.button initial={{ opacity: 0,scale:0.5 }} whileHover={{ scale: 1.05 }} whileInView={{ opacity: 1,scale:1 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className='bg-gray-50 text-sm py-2 px-5 rounded-lg mt-2 flex items-center space-x-1 shadow'onClick={() => navigate('/products')}><span>Order Now</span><span className='bg-white p-1 rounded'><FaArrowRightLong /></span></motion.button> */}
+        <motion.button initial={{ opacity: 0,scale:0.5 }} whileHover={{ scale: 1.05 }} whileInView={{ opacity: 1,scale:1 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className='bg-gray-50 text-sm py-2 px-5 rounded-lg mt-2 flex items-center space-x-1 shadow'onClick={() => navigate('/products')}><span>Order Now</span><span className='bg-white p-1 rounded'><FaArrowRightLong /></span></motion.button>
 
         </div>
         </motion.div>

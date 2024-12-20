@@ -13,7 +13,7 @@ const Product = () => {
     <button
       className={`transition-colors duration-300 ease-in-out px-4 py-2 border rounded-md font-medium ${
         activeComponent === "GetSession"
-          ? "text-white border-primary bg-primary"
+          ? "text-white border-primary bg-gradient-to-r from-primary to-text"
           : "text-gray-700 border-gray-300 hover:text-primary hover:border-primary"
       }`}
       onClick={() => {
@@ -26,7 +26,7 @@ const Product = () => {
     <button
       className={`transition-colors duration-300 ease-in-out px-4 py-2 border rounded-md font-medium ${
         activeComponent === "AddSession"
-          ? "text-white border-primary bg-primary"
+          ? "text-white border-primary bg-gradient-to-r from-primary to-text"
           : "text-gray-700 border-gray-300 hover:text-primary hover:border-primary"
       }`}
       onClick={() => {

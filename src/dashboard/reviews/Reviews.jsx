@@ -25,7 +25,7 @@ const Review = () => {
         }
       })
       .catch((error) => {
-        console.error("Error fetching product reviews:", error);
+        // console.error("Error fetching product reviews:", error);
       })
       .finally(() => {
         setLoading(false); // Stop loading
@@ -43,7 +43,7 @@ const Review = () => {
         }
       })
       .catch((error) => {
-        console.error("Error fetching session reviews:", error);
+        // console.error("Error fetching session reviews:", error);
       })
       .finally(() => {
         setLoading(false); // Stop loading
@@ -76,7 +76,7 @@ const Review = () => {
   );
 
   const handleApprove = (id) => {
-    console.log(id);
+    // console.log(id);
     const baseUrl =
       activeTab === "product"
         ? `${import.meta.env.VITE_BACKEND_API}/v1/review`
@@ -85,11 +85,13 @@ const Review = () => {
     axios
       .put(`${baseUrl}/${id}`, { isApproved: true })
       .then(() => {
-        console.log(`Review with ID: ${id} has been approved.`);
+        // console.log(`Review with ID: ${id} has been approved.`);
         // Re-fetch the data
         activeTab === "product" ? fetchProducts() : fetchSessions();
       })
-      .catch((err) => console.error("Error approving review:", err));
+      .catch((err) =>{
+        //  console.error("Error approving review:", err)
+        });
   };
 
   const handleDelete = (id) => {
@@ -102,15 +104,17 @@ const Review = () => {
             ? `${import.meta.env.VITE_BACKEND_API}/v1/review`
             : `${import.meta.env.VITE_BACKEND_API}/v1/reviewsessions`;
 
-    console.log("Delete Request URL:", `${baseUrl}/${id}`);
+    // console.log("Delete Request URL:", `${baseUrl}/${id}`);
 
     axios
         .delete(`${baseUrl}/${id}`)
         .then(() => {
-            console.log(`Review with ID: ${id} has been deleted.`);
+            // console.log(`Review with ID: ${id} has been deleted.`);
             activeTab === "product" ? fetchProducts() : fetchSessions();
         })
-        .catch((err) => console.error("Error deleting review:", err))
+        .catch((err) =>{ 
+          // console.error("Error deleting review:", err)
+        })
         .finally(() => {
             setIsDeleting(false);
             setShowDeletingModal(false); // Hide the deleting modal
@@ -118,7 +122,7 @@ const Review = () => {
 };
 
   
-  console.log("Active Tab:", activeTab);
+  // console.log("Active Tab:", activeTab);
 
   const openDeleteConfirm = (id) => {
     setId(id);
@@ -134,7 +138,7 @@ const Review = () => {
           <button
             className={`transition-colors duration-300 ease-in-out px-4 py-2 border rounded-md font-medium ${
               activeTab === "product"
-                ? "text-white border-primary bg-primary"
+                ? "text-white border-primary bg-gradient-to-r from-primary to-text"
                 : "text-gray-700 border-gray-300 hover:text-primary hover:border-primary"
             }`}
             onClick={() => {
@@ -148,7 +152,7 @@ const Review = () => {
           <button
             className={`transition-colors duration-300 ease-in-out px-4 py-2 border rounded-md font-medium ${
               activeTab === "sessions"
-                ? "text-white border-primary bg-primary"
+                ? "text-white border-primary bg-gradient-to-r from-primary to-text"
                 : "text-gray-700 border-gray-300 hover:text-primary hover:border-primary"
             }`}
             onClick={() => {
@@ -319,13 +323,13 @@ const Review = () => {
           </div>
 
           {/* Pagination */}
-          <div className="mt-4 flex md:space-x-2">
+          <div className="mt-4 flex justify-center md:justify-start md:space-x-2">
             <button
               onClick={() => setCurrentPage(currentPage - 1)}
               disabled={currentPage === 1}
               className="px-4 py-2 bg-gray-200 text-sm rounded"
             >
-              Previous
+              Prev
             </button>
             <span className="px-4 py-2 text-sm text-gray-600">
               Page {currentPage} of {totalPages}

@@ -113,7 +113,7 @@ const Navbar = () => {
                     <HiOutlineHome className="text-2xl text-gray-700" />
                     <span>Home</span>
                   </Link>
-                  {/* <Link
+                  <Link
                     to="/products"
                     className={`flex items-center space-x-1 ${
                       activePath == "products"
@@ -123,7 +123,7 @@ const Navbar = () => {
                   >
                     <RiShoppingBasket2Line className="text-2xl text-gray-700" />
                     <span>Products</span>
-                  </Link> */}
+                  </Link>
                   <Link
                     to="/sessions"
                     className={`flex items-center space-x-1 ${
@@ -158,8 +158,8 @@ const Navbar = () => {
                     <span>Contact Us</span>
                   </Link>
                 </div>
-                <Link to={'/sessions'} className="bg-[#3C3F46] text-white px-4 py-2 rounded-md shadow-lg hover:scale-110 transition-transform will-change-transform duration-300 hidden md:block">
-                  Register Now
+                <Link to={'/products'} className="bg-[#3C3F46] text-white px-4 py-2 rounded-md shadow-lg hover:scale-110 transition-transform will-change-transform duration-300 hidden md:block">
+                  Shop Now
                 </Link>
               </div>
             </div>

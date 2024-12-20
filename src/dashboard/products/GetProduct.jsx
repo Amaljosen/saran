@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const GetProduct = () => {
+  const [variationId, setVariationId] = useState("");
+  const [variationPop, setVariationPop] = useState(false);
   const [activeTab, setActiveTab] = useState("Products");
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -16,22 +18,26 @@ const GetProduct = () => {
   // Fetch Product Data
   const fetchData = () => {
     setLoading(true);
-  
+
     // Fetch Products
     axios
       .get(`${import.meta.env.VITE_BACKEND_API}/v1/product`)
       .then((res) => setProducts(res.data.data))
-      .catch((err) => console.error(err))
+      .catch((err) => {
+        // console.error(err)
+    })
       .finally(() => setLoading(false));
-  
+
     // Fetch Categories
     axios
       .get(`${import.meta.env.VITE_BACKEND_API}/v1/product-variations`)
       .then((res) => setCategories(res.data))
-      .catch((err) => console.error(err))
+      .catch((err) =>{
+        //  console.error(err)
+    })
       .finally(() => setLoading(false));
   };
-  
+
   useEffect(() => {
     fetchData(); // Call the fetchData function on mount
   }, []);
@@ -59,22 +65,40 @@ const GetProduct = () => {
     setIsDeleting(true);
     setShowDeletingModal(true);
 
+    const matchingEntries = categories.filter(
+      (item) => item.product_id === variationId
+    );
+
     const deleteRequest =
       activeTab === "Products"
         ? axios.delete(`${import.meta.env.VITE_BACKEND_API}/v1/product/${id}`)
-        : axios.delete(
+        : matchingEntries.length > 1
+        ? axios.delete(
             `${import.meta.env.VITE_BACKEND_API}/v1/product-variations/${id}`
-          );
+          )
+        : null;
+
+    if (!deleteRequest) {
+      setVariationPop(true);
+      // console.log(
+      //   `Product ID "${variationId}" is not found in the categories.`
+      // );
+      setIsDeleting(false);
+      setShowDeletingModal(false);
+      return;
+    }
 
     deleteRequest
-        .then(() => {
-          fetchData(); // Refresh data after delete without refresh
-        })
-        .catch((err) => console.error(err))
-        .finally(() => {
-          setIsDeleting(false);
-          setShowDeletingModal(false);
-        });
+      .then(() => {
+        fetchData(); // Refresh data after delete without refresh
+      })
+      .catch((err) => {
+        // console.error(err)
+   } )
+      .finally(() => {
+        setIsDeleting(false);
+        setShowDeletingModal(false);
+      });
   };
 
   const openDeleteConfirm = (productId) => {
@@ -162,11 +186,11 @@ const GetProduct = () => {
                   </thead>
                   <tbody>
                     {paginatedData.map((product, index) => (
-                      <tr key={product.product_id} className="hover:bg-gray-50">
+                      <tr key={product.product_id} className="hover:bg-gray-50 text-center">
                         <td className="px-4 py-2 text-center border border-gray-200">
                           {(currentPage - 1) * itemsPerPage + index + 1}
                         </td>
-                        <td className="px-4 py-2 border border-gray-200">
+                        <td className="px-4 py-2 border border-gray-200 ">
                           <img
                             src={
                               product.productVariation[0]
@@ -228,7 +252,7 @@ const GetProduct = () => {
                         "N/A"}
                     </p>
                     <button
-                      className="mt-2 px-4 py-1 text-white bg-red-500 rounded hover:bg-red-600"
+                      className="mt-2 px-4 py-1 text-white bg-red-500 w-full rounded hover:bg-red-600"
                       onClick={() => openDeleteConfirm(product.product_id)}
                     >
                       Delete
@@ -267,7 +291,7 @@ const GetProduct = () => {
                     {paginatedData.map((category, index) => (
                       <tr
                         key={category.productVariation_id}
-                        className="hover:bg-gray-50"
+                        className="hover:bg-gray-50 text-center"
                       >
                         <td className="px-4 py-2 text-center border border-gray-200">
                           {(currentPage - 1) * itemsPerPage + index + 1}
@@ -276,7 +300,7 @@ const GetProduct = () => {
                           <img
                             src={category.productVariation_image}
                             alt="Category"
-                            className="w-16 h-16 object-cover"
+                            className="w-16 h-16 object-cover mx-auto"
                           />
                         </td>
                         <td className="px-4 py-2 border border-gray-200">
@@ -291,9 +315,10 @@ const GetProduct = () => {
                         <td className="px-4 py-2 border border-gray-200">
                           <button
                             className="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600"
-                            onClick={() =>
-                              openDeleteConfirm(category.productVariation_id)
-                            }
+                            onClick={() => {
+                              openDeleteConfirm(category.productVariation_id);
+                              setVariationId(category.product_id);
+                            }}
                           >
                             Delete
                           </button>
@@ -324,10 +349,11 @@ const GetProduct = () => {
                       Price: {category.productVariation_price}
                     </p>
                     <button
-                      className="mt-2 px-4 py-1 text-white bg-red-500 rounded hover:bg-red-600"
-                      onClick={() =>
-                        openDeleteConfirm(category.productVariation_id)
-                      }
+                      className="mt-2 px-4 py-1 text-white w-full bg-red-500 rounded hover:bg-red-600"
+                      onClick={() => {
+                        openDeleteConfirm(category.productVariation_id);
+                        setVariationId(category.product_id);
+                      }}
                     >
                       Delete
                     </button>
@@ -338,13 +364,13 @@ const GetProduct = () => {
           )}
 
           {/* Pagination */}
-          <div className="flex space-x-2 items-center mt-6">
+          <div className="flex space-x-2 justify-center md:justify-start items-center mt-6">
             <button
               className="px-4 py-2 text-sm text-gray-700 bg-gray-100 border rounded hover:bg-gray-200"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((prev) => prev - 1)}
             >
-              Previous
+              Prev
             </button>
             <span>
               Page {currentPage} of {totalPages}
@@ -395,6 +421,39 @@ const GetProduct = () => {
                 className="px-4 py-2 text-sm bg-red-500 rounded text-white hover:bg-red-600"
               >
                 {isDeleting ? "Deleting..." : "Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {variationPop && (
+        <div className="fixed inset-0 flex items-center bg-gray-500 bg-opacity-50  justify-center z-50">
+          <div className="bg-white rounded flex flex-col items-center justify-center mx-5 shadow-lg p-4 w-full max-w-md">
+            <lord-icon
+              id="success-icon"
+              src="https://cdn.lordicon.com/vihyezfv.json"
+              trigger="in"
+              state="in-warning" // Set to loop to repeat the animation
+              style={{ width: "80px", height: "80px" }}
+              colors="primary:#ef4444"
+            ></lord-icon>
+            <p className="text-gray-700 text-sm md:text-base text-center">
+              This product has only one variation. To delete it, please try
+              the product section.
+            </p>
+            <div className="mt-4 flex justify-center">
+              <button
+                onClick={() => setVariationPop(false)}
+                className="px-4 py-2 mr-2 text-sm bg-gray-200 rounded text-gray-700 hover:bg-gray-300"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => setVariationPop(false)}
+                className="px-4 py-2 text-sm bg-red-500 rounded text-white hover:bg-red-600"
+              >
+                Ok
               </button>
             </div>
           </div>

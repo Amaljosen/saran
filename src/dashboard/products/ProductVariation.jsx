@@ -16,15 +16,16 @@ function ProductVariation() {
   const [productVariation, setProductVariation] = useState({
     productVariation_price: "",
     size: "",
-    shipping_charges: "",
-    delivery_details: "",
+    shipping_charges: "120",
+    delivery_details: "7 to 10 days",
     requirements1: "",
     requirements2: "",
     requirements3: "",
-    theme: "",
+    theme: "Customize",
     description: "",
     about: "",
   });
+
 
   // Fetch categories on mount
   useEffect(() => {
@@ -35,7 +36,7 @@ function ProductVariation() {
         );
         setCategories(response.data.data); // Assuming the response data is in response.data.data
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        // console.error("Error fetching categories:", error);
       }
     };
 
@@ -52,7 +53,7 @@ function ProductVariation() {
           );
           setSubcategories(response.data.data); // Assuming the response data is in response.data.data
         } catch (error) {
-          console.error("Error fetching subcategories:", error);
+          // console.error("Error fetching subcategories:", error);
         }
       };
 
@@ -70,7 +71,7 @@ function ProductVariation() {
           );
           setProducts(response.data.data); // Assuming the response data is in response.data.data
         } catch (error) {
-          console.error("Error fetching products:", error);
+          // console.error("Error fetching products:", error);
         }
       };
 
@@ -152,7 +153,7 @@ function ProductVariation() {
     formData.append("theme", productVariation.theme);
     formData.append("about", productVariation.about);
 
-    console.log(formData);
+    // console.log(formData);
 
     try {
       await axios.post(
@@ -165,11 +166,11 @@ function ProductVariation() {
       }, 5000);
       handleReset();
     } catch (error) {
-      console.error(
-        "Error adding product variation:",
-        error.response?.data || error.message
-      );
-      alert("Error adding product variation. Please try again.");
+      // console.error(
+      //   "Error adding product variation:",
+      //   error.response?.data || error.message
+      // );
+      // alert("Error adding product variation. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -181,16 +182,16 @@ function ProductVariation() {
         <form className="mx-auto py-5  " onSubmit={handleSubmit}>
           <div className="bg-[#e9e9e9] w-full border-l-4 border-[#8c4cff] mb-3">
             <div className="flex text-[#000000] space-x-2 text-sm md:text-base font-semibold p-2 items-center">
-              <h1>Product Details</h1>
+              <h1>Product Details:-</h1>
               <MdEditDocument className="text-xl" />
             </div>
           </div>
           <div className="lg:flex justify-start items-center px-2 lg:space-x-6 pb-6 lg:space-y-0 space-y-4">
             {/* Category Dropdown */}
             <div className="text-sm md:text-base space-y-1">
-              <h2>Category:</h2>
+              <h2>Category:-</h2>
               <select
-                className="focus:outline-none border rounded p-1 w-full lg:w-[300px] h-[40px]"
+                className="focus:outline-none border rounded p-2 w-full lg:w-[300px] h-[40px]"
                 value={selectedCategory}
                 required
                 onChange={(e) => setSelectedCategory(e.target.value)}
@@ -209,9 +210,9 @@ function ProductVariation() {
 
             {/* Subcategory Dropdown */}
             <div className="text-sm md:text-base space-y-1">
-              <h2>Subcategory:</h2>
+              <h2>Subcategory:-</h2>
               <select
-                className="focus:outline-none border rounded p-1 w-full lg:w-[350px] h-[40px]"
+                className="focus:outline-none border rounded p-2 w-full lg:w-[350px] h-[40px]"
                 value={selectedSubcategory}
                 required
                 onChange={(e) => setSelectedSubcategory(e.target.value)}
@@ -230,9 +231,9 @@ function ProductVariation() {
 
             {/* Product Name Dropdown */}
             <div className="text-sm md:text-base space-y-1 ">
-              <h2>Product Name:</h2>
+              <h2>Product Name:-</h2>
               <select
-                className="focus:outline-none border rounded p-1 w-full lg:w-[300px] h-[40px]"
+                className="focus:outline-none border rounded p-2 w-full lg:w-[300px] h-[40px]"
                 value={selectedProduct}
                 required
                 onChange={(e) => setSelectedProduct(e.target.value)}
@@ -261,7 +262,7 @@ function ProductVariation() {
                 required
                 onChange={handleFileChange}
                 type="file"
-                className="focus:outline-none border  rounded p-1 w-full "
+                className="focus:outline-none border  rounded p-2 w-full "
               />
             </div>
             <div className="text-sm md:text-base space-y-1">
@@ -273,7 +274,7 @@ function ProductVariation() {
                 value={productVariation.productVariation_price}
                 onChange={handleInputChange}
                 placeholder="Enter  Variation Price"
-                className="focus:outline-none border  rounded p-1 w-full  h-[40px]"
+                className="focus:outline-none border  rounded p-2 w-full  h-[40px]"
               />
             </div>
             <div className="text-sm md:text-base space-y-1">
@@ -285,7 +286,7 @@ function ProductVariation() {
                 value={productVariation.size}
                 onChange={handleInputChange}
                 placeholder="Enter Variation Size"
-                className="focus:outline-none border  rounded p-1 w-full  h-[40px]"
+                className="focus:outline-none border  rounded p-2 w-full  h-[40px]"
               />
             </div>
             <div className="text-sm md:text-base space-y-1">
@@ -297,7 +298,7 @@ function ProductVariation() {
                 value={productVariation.theme}
                 onChange={handleInputChange}
                 placeholder="Enter Variation theme"
-                className="focus:outline-none border  rounded p-1 w-full  h-[40px]"
+                className="focus:outline-none border  rounded p-2 w-full  h-[40px]"
               />
             </div>
           </div>
@@ -311,7 +312,7 @@ function ProductVariation() {
                 value={productVariation.shipping_charges}
                 placeholder="Enter Variation Shipping Charges"
                 onChange={handleInputChange}
-                className="focus:outline-none border  rounded p-1 w-full h-[40px]"
+                className="focus:outline-none border  rounded p-2 w-full h-[40px]"
               />
             </div>
             <div className="text-sm md:text-base space-y-1">
@@ -323,7 +324,7 @@ function ProductVariation() {
                 value={productVariation.delivery_details}
                 placeholder="Enter Variation Delivery Details"
                 onChange={handleInputChange}
-                className="focus:outline-none border  rounded p-1 w-full h-[40px]"
+                className="focus:outline-none border  rounded p-2 w-full h-[40px]"
               />
             </div>
           </div>
@@ -335,7 +336,7 @@ function ProductVariation() {
                 value={productVariation.description}
                 required
                 onChange={handleInputChange}
-                className="focus:outline-none border  w-full h-[60px]  rounded p-1"
+                className="focus:outline-none border  w-full h-[60px]  rounded p-2"
                 rows="2"
                 cols="51"
                 placeholder="Enter message here..."
@@ -349,7 +350,7 @@ function ProductVariation() {
                 onChange={handleInputChange}
                 placeholder="Enter Varition About"
                 required
-                className="focus:outline-none border  rounded p-1 w-full "
+                className="focus:outline-none border  rounded p-2 w-full "
                 rows="2"
                 cols="51"
               ></textarea>
@@ -415,13 +416,13 @@ function ProductVariation() {
           <div className="flex justify-center lg:justify-start space-x-4 items-center px-2 text-md md:text-base pb-5">
             <button
               onClick={handleReset}
-              className="lg:px-4 px-4 py-2 lg:py-1 rounded md:hover:scale-105 transition-all duration-300   border"
+              className="lg:px-4 px-4 py-2 text-sm rounded md:hover:scale-105 transition-all duration-300   border"
             >
               Reset
             </button>
             <button
               type="submit"
-              className="lg:px-4 px-4 py-2 lg:py-1 rounded  border bg-[#8c4cff] md:hover:scale-105 transition-all duration-300 text-white"
+              className="lg:px-4 px-4 py-2 text-sm rounded  border bg-gradient-to-r from-primary to-text md:hover:scale-105 transition-all duration-300 text-white"
             >
               Add Product Variation
             </button>

@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 const Videos = () => {
-  // const videoURL=[
-  //   "https://ik.imagekit.io/cjureug40/Videos/VID-20241210-WA0002.mp4?updatedAt=1733809048250",
-  //   "https://ik.imagekit.io/cjureug40/Videos/VID-20241210-WA0001.mp4?updatedAt=1733809026405",
-  //   "https://ik.imagekit.io/cjureug40/Videos/online%20Session.mp4?updatedAt=1733809050235",
-  //   "https://ik.imagekit.io/cjureug40/Videos/VID-20241210-WA0004.mp4?updatedAt=1733809049368",
-  // ]
+  const videoSources = [
+    "https://ik.imagekit.io/cjureug40/Videos/VID-20241210-WA0002.mp4?updatedAt=1733809048250",
+    "https://ik.imagekit.io/cjureug40/Videos/VID-20241210-WA0001.mp4?updatedAt=1733809026405",
+    "https://ik.imagekit.io/cjureug40/Videos/online%20Session.mp4?updatedAt=1733809050235",
+    "https://ik.imagekit.io/cjureug40/Videos/VID-20241210-WA0004.mp4?updatedAt=1733809049368",
+  ];
+
+  const [errorIndexes, setErrorIndexes] = useState([]);
+
+  const handleVideoError = (index) => {
+    setErrorIndexes((prev) => [...prev, index]);
+  };
+
   return (
     <div>
       <motion.div
@@ -27,51 +34,34 @@ const Videos = () => {
       </motion.div>
 
       <div className="mt-5 md:mt-8">
-        <div className="grid lg:grid-cols-4  grid-cols-1 gap-6 p-5">
-          <motion.video
-            initial={{ opacity: 0, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            src="https://ik.imagekit.io/cjureug40/Videos/VID-20241210-WA0002.mp4?updatedAt=1733809048250"
-            className=" h-full w-full rounded-lg"
-            controls
-            preload="metadata" // Add preload for lazy loading
-            playsInline
-          />
-          <motion.video
-            initial={{ opacity: 0, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            src="https://ik.imagekit.io/cjureug40/Videos/VID-20241210-WA0001.mp4?updatedAt=1733809026405"
-            className=" h-full w-full rounded-lg"
-            controls
-            preload="metadata" // Add preload for lazy loading
-            playsInline
-          />
-          <motion.video
-            initial={{ opacity: 0, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            src="https://ik.imagekit.io/cjureug40/Videos/online%20Session.mp4?updatedAt=1733809050235"
-            className=" h-full w-full rounded-lg"
-            controls
-            preload="metadata" // Add preload for lazy loading
-            playsInline
-          />
-          <motion.video
-            initial={{ opacity: 0, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            src="https://ik.imagekit.io/cjureug40/Videos/VID-20241210-WA0004.mp4?updatedAt=1733809049368"
-            className=" h-full w-full rounded-lg"
-            controls
-            preload="metadata" // Add preload for lazy loading
-            playsInline
-          />
+        <div className="grid lg:grid-cols-4 grid-cols-1 gap-6 p-5">
+          {videoSources.map((src, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+              className="h-full w-full rounded-lg"
+            >
+              {errorIndexes.includes(index) ? (
+                <div className="h-full w-full flex items-center py-3 justify-center bg-gray-100 rounded-lg">
+                  <p className="text-sm text-gray-500">
+                  Your browser or device does not support this video.
+                  </p>
+                </div>
+              ) : (
+                <video
+                  src={src}
+                  className="h-full w-full rounded-lg"
+                  controls
+                  preload="metadata"
+                  playsInline
+                  onError={() => handleVideoError(index)}
+                />
+              )}
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>

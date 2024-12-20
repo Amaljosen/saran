@@ -281,7 +281,7 @@ const SessionDescription = () => {
         </div>
 
         {/* Additional Information Section */}
-        <div className="grid lg:grid-cols-2 gap-8 mt-10 px-6 py-4 mx-5 bg-[#FCFAFF] border rounded-lg">
+        <div className="grid lg:grid-cols-2 gap-8 mt-10 px-6 py-4 md:mx-8 mx-5 lg:mx-0 bg-[#FCFAFF] border rounded-lg">
           <div>
             <h3 className="text-lg font-semibold text-primary">
               What You Will Learn?

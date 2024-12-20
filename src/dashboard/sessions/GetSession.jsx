@@ -22,7 +22,7 @@ const Sessions = () => {
         }
       })
       .catch((error) => {
-        console.error("Error fetching session data:", error);
+        // console.error("Error fetching session data:", error);
       })
       .finally(() => {
         setLoading(false);
@@ -52,7 +52,7 @@ const Sessions = () => {
       );
       setSessions(updatedSessions);
     } catch (error) {
-      console.error("Error deleting session:", error);
+      // console.error("Error deleting session:", error);
     } finally {
       setIsDeleting(false);
       setShowDeletingModal(false); // Hide the deleting modal
@@ -115,10 +115,10 @@ const Sessions = () => {
                 <div className="text-sm">
                   <strong>Time:</strong> {session.time}
                 </div>
-                <div className="text-base font-bold mt-2">₹{session.price}</div>
+                <div className="text-xl font-bold mt-2">₹{session.price}</div>
                 <button
                   onClick={() => openDeleteConfirm(session.session_id)}
-                  className="mt-3 px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600"
+                  className="mt-3 px-4 py-2 text-sm text-white bg-red-500 w-full rounded hover:bg-red-600"
                 >
                   Delete
                 </button>
@@ -192,12 +192,12 @@ const Sessions = () => {
             </table>
           </div>
 
-          <div className="mt-4 flex items-center space-x-4">
+          <div className="mt-4 flex items-center justify-center md:justify-start space-x-4">
             <button
               onClick={() => setCurrentPage(Math.max(currentPage - 1, 1))}
               className="px-4 py-2 bg-gray-200 rounded text-gray-700 hover:bg-gray-300"
             >
-              Previous
+              Prev
             </button>
             <span className="text-gray-700">
               Page {currentPage} of {totalPages}

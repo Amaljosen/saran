@@ -9,7 +9,7 @@ const Nav = ({ activeButton, setActiveButton }) => {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false); // Popup state
 
   const handleLogout = () => {
-    console.log("Logged out");
+    // console.log("Logged out");
     setShowLogoutPopup(false); // Close the popup after logout
   };
 
@@ -102,10 +102,13 @@ const Nav = ({ activeButton, setActiveButton }) => {
         )}
 
         {/* Mobile Menu */}
-        <div
-          className={`lg:hidden fixed z-[5] top-20 w-[80%] py-8 bg-[#3C3F46] text-white text-sm transition-all duration-300 flex flex-col justify-between h-[36rem] rounded-br-lg ${
+        <div 
+          className={`lg:hidden fixed z-[10] top-20 w-[80%] h-screen bg-[#3C3F46] text-white text-sm transition-all duration-300 ${
             isOpen ? "left-0 " : "-left-[65rem]"
           }`}
+        >
+        <div
+          className={` py-8 flex flex-col justify-between h-[75%]`}
         >
           <ul className="space-y-2 w-[90%] mx-auto">
             {["My Orders", "Products", "Sessions", "Reviews"].map(
@@ -149,6 +152,7 @@ const Nav = ({ activeButton, setActiveButton }) => {
               <FiLogOut />
             </button>
           </div>
+        </div>
         </div>
       </div>
     </div>

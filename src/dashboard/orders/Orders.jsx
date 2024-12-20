@@ -24,7 +24,7 @@ const Orders = () => {
               key={tab.name}
               className={`transition-colors duration-300 ease-in-out px-4 py-2 border rounded-md font-medium ${
                 activeComponent === tab.name
-                  ? "text-white border-primary bg-primary"
+                  ? "text-white border-primary bg-gradient-to-r from-primary to-text"
                   : "text-gray-700 border-gray-300 hover:text-primary hover:border-primary"
               }`}
               onClick={() => {

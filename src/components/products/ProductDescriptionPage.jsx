@@ -9,7 +9,7 @@ import { VscDiffAdded } from "react-icons/vsc";
 import ProductsFeedback from "./ProductsFeedback";
 import { IoStarSharp } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
-import FAQ from "./Faq";
+import FAQ from "./FAQ";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { VscSmiley } from "react-icons/vsc";
 
@@ -200,19 +200,19 @@ const handleBuy = () => {
     price: selectedVariation.productVariation_price,
     shipping_charges: selectedVariation.shipping_charges,
     size: selectedVariation.size,
-    description:selectedVariation.about,
+    description:selectedVariation.description,
     req1:selectedVariation.requirements1,
     req2:selectedVariation.requirements2,
     req3:selectedVariation.requirements3
   });
-//   console.log("Data being set:", {
-//     productName: product.product_name,
-//     subcategoryId: product.subcategory_id,
-//     price: selectedVariation.productVariation_price,
-//     shipping: selectedVariation.shipping_charges,
-//     size: selectedVariation.size,
-//     description:selectedVariation.about
-//   });
+  // console.log("Data being set:", {
+  //   productName: product.product_name,
+  //   subcategoryId: product.subcategory_id,
+  //   price: selectedVariation.productVariation_price,
+  //   shipping: selectedVariation.shipping_charges,
+  //   size: selectedVariation.size,
+  //   description:selectedVariation.description
+  // });
 
 navigate("/product-form");
 

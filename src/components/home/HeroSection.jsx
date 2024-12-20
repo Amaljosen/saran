@@ -16,7 +16,7 @@ const carouselData = [
     content2: "Transforming Your Special Moments into Lasting Art",
     btnContent: "Miniature Shadow Box",
     btnText: "Shop Now",
-    link: "sessions",
+    link: "products",
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const carouselData = [
     content2: "Transforming Moments into Elegant, Lasting Pieces",
     btnContent: "Timeless Resin Art",
     btnText: "Shop Now",
-    link: "sessions",
+    link: "products",
   },
   {
     id: 3,

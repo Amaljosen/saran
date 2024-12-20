@@ -40,7 +40,7 @@ function AddSubcategory() {
       fetchSubcategories();
       setPoptext("delete_success");
     } catch (error) {
-      console.error("Error deleting subcategory:", error);
+      // console.error("Error deleting subcategory:", error);
       setPoptext("error");
     } finally {
       setTimeout(() => {
@@ -58,7 +58,7 @@ function AddSubcategory() {
         );
         setCategories(response.data.data);
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        // console.error("Error fetching categories:", error);
       }
     };
 
@@ -76,7 +76,7 @@ function AddSubcategory() {
       );
       setSubcategories(response.data.data);
     } catch (error) {
-      console.error("Error fetching subcategories:", error);
+      // console.error("Error fetching subcategories:", error);
     }
   };
 
@@ -114,7 +114,7 @@ function AddSubcategory() {
       setSelectedCategory("");
       setPoptext("add_success");
     } catch (error) {
-      console.error("Error creating subcategory:", error);
+      // console.error("Error creating subcategory:", error);
       setPoptext("error");
     } finally {
       setTimeout(() => {
@@ -168,29 +168,29 @@ function AddSubcategory() {
             <div className="pb-5 flex justify-center lg:justify-start space-x-4 items-center px-2 text-sm md:text-base">
               <button
                 onClick={handleReset}
-                className="lg:px-4 px-4 py-2 lg:py-1 md:hover:scale-105 transition-all duration-300 rounded border"
+                className="lg:px-4 px-4 py-2 text-sm md:hover:scale-105 transition-all duration-300 rounded border"
               >
                 Reset
               </button>
               <button
                 onClick={handleSubmit}
-                className="lg:px-4 px-4 py-2 lg:py-1 rounded border md:hover:scale-105 transition-all duration-300 border-[#8c4cff] bg-[#8c4cff] text-white"
+                className="lg:px-4 px-4 py-2 text-sm rounded border md:hover:scale-105 transition-all duration-300 border-[#8c4cff] bg-gradient-to-r from-primary to-text text-white"
               >
                 Add Subcategory
               </button>
             </div>
 
             {/* Subcategory List Table */}
-            <table className="mt-6 w-full lg:w-[80%] border-collapse border text-sm md:text-base border-gray-200">
+            <table className="mt-6 w-full lg:w-[80%] text-center border-collapse border text-sm md:text-base border-gray-200">
               <thead>
                 <tr className="bg-[#FBFBFB]">
-                  <th className="border border-gray-300 px-4 py-2 text-left">
+                  <th className="border border-gray-300 px-4 py-2">
                     SI/NO
                   </th>
-                  <th className="border border-gray-300 px-4 py-2 text-left">
+                  <th className="border border-gray-300 px-4 py-2">
                     Title
                   </th>
-                  <th className="border border-gray-300 px-4 py-2 text-left">
+                  <th className="border border-gray-300 px-4 py-2">
                     Action
                   </th>
                 </tr>
@@ -201,7 +201,7 @@ function AddSubcategory() {
                     key={subcategory.id || index}
                     className="hover:bg-gray-50"
                   >
-                    <td className="border border-gray-300 px-4 py-2 text-center md:text-start">
+                    <td className="border border-gray-300 px-4 py-2 text-center">
                       {(currentPage - 1) * itemsPerPage + index + 1}
                     </td>
                     <td className="border border-gray-300 px-4 py-2">

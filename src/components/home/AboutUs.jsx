@@ -69,12 +69,12 @@ const AboutUs = () => {
             workshops to inspire others to master the art of handcrafting.
           </p>
           <div className="flex gap-4">
-            {/* <button
+            <button
               className="px-4 py-3 text-sm bg-primary text-white rounded-lg font-medium hover:bg-black hover:scale-105 transition-transform will-change-transform duration-300"
               onClick={() => navigate("/products")}
             >
               Explore Products
-            </button> */}
+            </button>
             <button
               className="px-4 py-3 text-sm border border-primary text-primary rounded-lg font-medium hover:border-black hover:text-black hover:scale-105 transition-transform will-change-transform duration-300"
               onClick={() => navigate("/sessions")}
@@ -143,13 +143,13 @@ const AboutUs = () => {
         >
           <h2 className="text-3xl font-bold ">500+</h2>
           <p className="text-gray-500">Orders Completed</p>
-          {/* <button
+          <button
             className="mt-4 w-full justify-center py-3 bg-primary text-white rounded-lg shadow-sm flex gap-x-1 items-center hover:bg-black hover:scale-105 transition-transform will-change-transform duration-300"
             onClick={() => navigate("/products")}
           >
             <FaArrowUp className="rotate-45" />
             <p>Order Now</p>
-          </button> */}
+          </button>
         </motion.div>
 
         {/* Students Card */}
